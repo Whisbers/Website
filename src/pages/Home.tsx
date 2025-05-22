@@ -32,13 +32,23 @@ export default function Home() {
             size="lg"
             variant="bordered"
             className="border-2"
+            startContent={<Icon icon="lucide:download" />}
+            as={Link}
+            to="/download"
+          >
+            Download
+          </Button>
+          {/* <Button
+            size="lg"
+            variant="bordered"
+            className="border-2"
             startContent={<Icon icon="mdi:github" className="text-2xl" />}
             as="a"
             href="https://github.com/Parsa3323/AdvancedArmorStands"
             target="_blank"
           >
             GitHub
-          </Button>
+          </Button> */}
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 py-16 relative z-10">
