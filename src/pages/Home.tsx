@@ -96,6 +96,16 @@ export default function Home() {
           >
             GitHub
           </Button>
+          <Button
+            variant="flat"
+            size="sm"
+            as="a"
+            href="https://docs.advancedarmorstands.ir"
+            target="_blank"
+            startContent={<Icon icon="mdi:book" />}
+          >
+            Wiki
+          </Button>
         </div>
       </div>
     </div>
@@ -126,5 +136,6 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
         <p className="text-default-400 w-full text-left">{description}</p>
       </div>
     </Button>
+    
   );
 }
