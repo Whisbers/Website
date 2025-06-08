@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import * as yaml from 'js-yaml';
 import { motion, AnimatePresence } from 'framer-motion';
 import ArmorStand from '../components/ArmorStand';
+import MetaTags from '../components/MetaTags';
 
 interface KeyFrame {
   head: { x: number; y: number; z: number };
@@ -150,6 +151,12 @@ export default function Animate() {
         setShowControls(false);
       }}
     >
+      <MetaTags 
+        title="Animation Creator - AdvancedArmorStands"
+        description="Create custom armor stand animations with our interactive 3D editor. Export animations for your Minecraft server."
+        url="https://advancedarmorstands.ir/#/animate"
+      />
+      
       <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#16161a] to-[#0d0d0e] border-b border-[#222224]">
         <div className="max-w-full mx-auto px-4 py-4">
           <div className="flex justify-between items-center">

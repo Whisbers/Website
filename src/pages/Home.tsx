@@ -2,10 +2,13 @@ import React from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import MetaTags from "../components/MetaTags";
 
 export default function Home() {
   return (
     <main className="dark min-h-screen bg-[radial-gradient(circle_at_center,#18181b,#030303)] relative overflow-hidden">
+      <MetaTags />
+      
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
@@ -38,17 +41,6 @@ export default function Home() {
           >
             Download
           </Button>
-          {/* <Button
-            size="lg"
-            variant="bordered"
-            className="border-2"
-            startContent={<Icon icon="mdi:github" className="text-2xl" />}
-            as="a"
-            href="https://github.com/Parsa3323/AdvancedArmorStands"
-            target="_blank"
-          >
-            GitHub
-          </Button> */}
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 py-16 relative z-10">
