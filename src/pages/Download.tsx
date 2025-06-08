@@ -3,6 +3,7 @@ import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useReleases } from "../hooks/useReleases";
+import MetaTags from "../components/MetaTags";
 
 export default function Download() {
   const navigate = useNavigate();
@@ -10,6 +11,12 @@ export default function Download() {
 
   return (
     <main className="dark min-h-screen bg-[radial-gradient(circle_at_center,#18181b,#030303)] relative overflow-hidden px-4 py-16">
+      <MetaTags 
+        title="Download - AdvancedArmorStands"
+        description="Download the latest version of AdvancedArmorStands plugin for Minecraft. Get changelogs and previous releases."
+        url="https://advancedarmorstands.ir/#/download"
+      />
+      
       {/* Grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)] z-0" />
 
