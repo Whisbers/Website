@@ -18,8 +18,8 @@ export default function Download() {
         url="https://advancedarmorstands.ir/#/download"
       />
       
-      {/* Grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)] z-0" />
+      {/* Grid background with fixed center light */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)] z-0" />
 
       <div className="relative z-10 max-w-5xl mx-auto space-y-12">
         <div className="text-center">
