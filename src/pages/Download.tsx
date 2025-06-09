@@ -3,6 +3,7 @@ import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useReleases } from "../hooks/useReleases";
+import { MarkdownPreview } from "../components/MarkdownPreview";
 import MetaTags from "../components/MetaTags";
 
 export default function Download() {
@@ -73,19 +74,41 @@ export default function Download() {
         </div>
       </div>
       
+      {/* Footer */}
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 pb-16 pt-16">
+        <div className="max-w-7xl mx-auto rounded-2xl border-2 border-[#222224] bg-gradient-to-b from-[#16161a] to-[#131316] p-6 text-center space-y-4">
+          <h2 className="text-2xl font-semibold text-white">
+            <span className="bg-gradient-to-br from-orange-500 via-primary-500 to-red-500 bg-clip-text text-transparent">
+              Thanks for Visiting!
+            </span>
+          </h2>
+          <p className="text-default-400">
+            Open-source. Actively supported. Built for creators like you.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button
+              variant="flat"
+              size="sm"
+              as="a"
+              href="https://github.com/Parsa3323"
+              target="_blank"
+              startContent={<Icon icon="mdi:github" />}
+            >
+              GitHub
+            </Button>
+            <Button
+              variant="flat"
+              size="sm"
+              as="a"
+              href="https://docs.advancedarmorstands.ir"
+              target="_blank"
+              startContent={<Icon icon="mdi:book" />}
+            >
+              Wiki
+            </Button>
+          </div>
+        </div>
+      </div>
     </main>
-  );
-}
-
-function MarkdownPreview({ content }: { content: string }) {
-  return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: content
-          .replace(/\n/g, "<br/>")
-          .replace(/(#+\s)(.*)/g, "<strong>$2</strong>")
-          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
-      }}
-    />
   );
 }
