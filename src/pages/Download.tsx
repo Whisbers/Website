@@ -28,17 +28,14 @@ export default function Download() {
         url="https://advancedarmorstands.ir/#/download"
       />
       
-      {/* Interactive grid background */}
+      {/* Grid background with mouse-following light */}
       <div 
         className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] z-0"
         style={{
-          maskImage: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.4), rgba(255,255,255,0.1) 40%, transparent 70%)`,
-          WebkitMaskImage: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.4), rgba(255,255,255,0.1) 40%, transparent 70%)`
+          maskImage: `radial-gradient(ellipse_60%_50%_at_${mousePosition.x}px_${mousePosition.y}px,black,transparent)`,
+          WebkitMaskImage: `radial-gradient(ellipse_60%_50%_at_${mousePosition.x}px_${mousePosition.y}px,black,transparent)`
         }}
       />
-      
-      {/* Base grid for subtle background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)] opacity-30 z-0" />
 
       <div className="relative z-10 max-w-5xl mx-auto space-y-12">
         <div className="text-center">
