@@ -157,16 +157,17 @@ export default function Animate() {
         url="https://advancedarmorstands.ir/#/animate"
       />
       
-      <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#16161a] to-[#0d0d0e] border-b border-[#222224]">
-        <div className="max-w-full mx-auto px-4 py-4">
+      {/* Header */}
+      <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-b border-gray-800/50">
+        <div className="max-w-full mx-auto px-6 py-6">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Button
                 as="a"
                 href="/"
                 color="primary"
                 isIconOnly
-                className=" bg-gradient-to-r from-orange-600 to-orange-600"
+                className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
               >
                 <Icon icon="lucide:arrow-left" className="w-5 h-5" />
               </Button>
@@ -174,30 +175,36 @@ export default function Animate() {
                 label="Animation Name"
                 value={animationName}
                 onChange={(e) => setAnimationName(e.target.value)}
-                className="w-48"
+                className="w-64"
+                classNames={{
+                  input: "bg-gray-800/50 border-gray-700/50",
+                  inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
+                }}
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute inset-0 pt-16">
+      {/* 3D Canvas */}
+      <div className="absolute inset-0 pt-20">
         <Canvas camera={{ position: [0, 2, 5] }} shadows>
-          <ambientLight intensity={0.5} />
+          <ambientLight intensity={0.4} />
           <directionalLight 
             position={[5, 5, 5]} 
-            intensity={1.5} 
+            intensity={1.2} 
             castShadow 
             shadow-mapSize={[2048, 2048]}
           />
-          <pointLight position={[-5, 5, -5]} intensity={0.8} />
-          <pointLight position={[5, -5, 5]} intensity={0.5} color="#ff5f15" />
+          <pointLight position={[-5, 5, -5]} intensity={0.6} />
+          <pointLight position={[5, -5, 5]} intensity={0.4} color="#ff5f15" />
           <ArmorStand frame={currentFrameData} />
-          <OrbitControls />
-          <gridHelper args={[10, 10, '#222224', '#222224']} />
+          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+          <gridHelper args={[10, 10, '#333336', '#222224']} />
         </Canvas>
       </div>
 
+      {/* Control Panel */}
       <AnimatePresence>
         {isPanelOpen && (
           <motion.div
@@ -205,27 +212,30 @@ export default function Animate() {
             animate={{ x: 0 }}
             exit={{ x: 400 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-16 right-0 bottom-32 w-96 bg-gradient-to-b from-[#16161a] to-[#0d0d0e] border-l border-[#222224] overflow-y-auto z-20"
+            className="fixed top-20 right-0 bottom-40 w-96 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
           >
-            <div className="p-6 space-y-6">
-              <Button
-                color="primary"
-                isIconOnly
-                className="absolute top-2 right-2  bg-gradient-to-r from-orange-600 to-orange-600"
-                onClick={() => setIsPanelOpen(false)}
-              >
-                <Icon icon="lucide:x" className="w-5 h-5" />
-              </Button>
+            <div className="p-6 space-y-8">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-light text-white">Animation Controls</h3>
+                <Button
+                  color="primary"
+                  isIconOnly
+                  className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600"
+                  onClick={() => setIsPanelOpen(false)}
+                >
+                  <Icon icon="lucide:x" className="w-4 h-4" />
+                </Button>
+              </div>
               
               {Object.entries(currentFrameData).map(([part, angles]) => (
-                <div key={part} className="mb-6">
-                  <h4 className="text-md font-medium mb-3 capitalize text-orange-500">
+                <div key={part} className="space-y-4">
+                  <h4 className="text-lg font-light capitalize text-orange-500 border-b border-gray-800/50 pb-2">
                     {part.replace('_', ' ')}
                   </h4>
                   {Object.entries(angles).map(([axis, value]) => (
-                    <div key={axis} className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm uppercase text-orange-500 font-medium">
+                    <div key={axis} className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-sm uppercase text-gray-400 font-medium tracking-wider">
                           {axis}
                         </label>
                         <Input
@@ -234,7 +244,11 @@ export default function Animate() {
                           onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
                           min={-180}
                           max={180}
-                          className="w-20 text-right"
+                          className="w-20"
+                          classNames={{
+                            input: "text-center bg-gray-800/50 border-gray-700/50",
+                            inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
+                          }}
                         />
                       </div>
                       <input
@@ -244,7 +258,7 @@ export default function Animate() {
                         min={-180}
                         max={180}
                         step={1}
-                        className="w-full h-2 bg-[#222224] rounded-lg appearance-none cursor-pointer accent-orange-500"
+                        className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-orange-500 slider"
                       />
                     </div>
                   ))}
@@ -255,56 +269,62 @@ export default function Animate() {
         )}
       </AnimatePresence>
 
+      {/* Bottom Controls */}
       <AnimatePresence>
         {showControls && (
           <motion.div
-            initial={{ y: 150 }}
+            initial={{ y: 200 }}
             animate={{ y: 0 }}
-            exit={{ y: 150 }}
+            exit={{ y: 200 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#16161a] to-[#0d0d0e] border-t border-[#222224] backdrop-blur-sm z-20"
+            className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-t border-gray-800/50 z-20"
           >
             <div className="max-w-full mx-auto p-8">
-              <div className="flex items-center gap-8 mb-4">
+              <div className="flex items-center gap-8 mb-6">
                 <Button
                   color="primary"
                   isIconOnly
-                  className="rounded-full w-12 h-12 bg-gradient-to-r from-orange-600 to-orange-600"
+                  className="rounded-full w-14 h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105"
                   onClick={playAnimation}
                 >
                   <Icon icon={isPlaying ? "lucide:pause" : "lucide:play"} className="w-6 h-6" />
                 </Button>
+                
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:plus" />}
+                  startContent={<Icon icon="lucide:plus\" className="w-5 h-5" />}
                   onClick={addKeyFrame}
-                  className=" bg-gradient-to-r from-orange-600 to-orange-600"
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
                   Add Keyframe
                 </Button>
+                
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:download" />}
+                  startContent={<Icon icon="lucide:download\" className="w-5 h-5" />}
                   onClick={exportAnimation}
-                  className=" bg-gradient-to-r from-orange-600 to-orange-600"
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
-                  Export
+                  Export Animation
                 </Button>
+                
                 {!isPanelOpen && (
                   <Button
                     color="primary"
+                    startContent={<Icon icon="lucide:settings\" className="w-5 h-5" />}
                     onClick={() => setIsPanelOpen(true)}
-                    className=" bg-gradient-to-r from-orange-600 to-orange-600"
+                    className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                   >
                     Show Controls
                   </Button>
                 )}
+                
                 <div className="flex-grow">
                   <div className="relative w-full">
                     <div 
-                      className="absolute h-2 bg-orange-500/30 rounded-l-lg" 
+                      className="absolute h-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300" 
                       style={{ 
-                        width: `${(currentFrame / (frames.length - 1)) * 100}%`,
+                        width: `${(currentFrame / Math.max(frames.length - 1, 1)) * 100}%`,
                         maxWidth: '100%'
                       }} 
                     />
@@ -315,23 +335,29 @@ export default function Animate() {
                       min={0}
                       max={frames.length - 1}
                       step={1}
-                      className="w-full h-2 bg-[#222224] rounded-lg appearance-none cursor-pointer accent-orange-500 relative z-10"
+                      className="w-full h-2 bg-gray-800 rounded-full appearance-none cursor-pointer accent-orange-500 relative z-10 slider"
                     />
                   </div>
                 </div>
-                <div className="w-32">
+                
+                <div className="w-40">
                   <Input
                     type="number"
                     label="Interval (ticks)"
                     value={interval}
                     min={1}
                     onChange={(e) => setInterval(Math.max(1, Number(e.target.value)))}
+                    classNames={{
+                      input: "bg-gray-800/50 border-gray-700/50",
+                      inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
+                    }}
                   />
                 </div>
               </div>
-              <div className="flex justify-between text-sm text-orange-500">
-                <span>Frame {currentFrame + 1}</span>
-                <span>Total Frames: {frames.length}</span>
+              
+              <div className="flex justify-between text-sm text-gray-400 font-light">
+                <span>Frame {currentFrame + 1} of {frames.length}</span>
+                <span>Duration: {Math.round(frames.length * interval / 20 * 100) / 100}s</span>
               </div>
             </div>
           </motion.div>
