@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
@@ -35,30 +35,7 @@ export default function Download() {
           <p className="text-default-400 text-center">Loading releases...</p>
         ) : (
           releases.map((release) => (
-            <div
-              key={release.tag_name}
-              className="rounded-2xl border-2 border-[#222224] bg-gradient-to-b from-[#16161a] to-[#131316] p-6 space-y-4"
-            >
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-white">
-                  {release.name} — <span className="text-default-400">{new Date(release.published_at).toDateString()}</span>
-                </h2>
-                <Button
-                  as="a"
-                  href={release.assets[0]?.browser_download_url}
-                  target="_blank"
-                  color="primary"
-                  size="sm"
-                  startContent={<Icon icon="mdi:download" />}
-                >
-                  Download .jar
-                </Button>
-              </div>
-
-              <div className="prose max-w-none prose-invert text-default-400">
-                <MarkdownPreview content={release.body} />
-              </div>
-            </div>
+            <ReleaseCard key={release.tag_name} release={release} />
           ))
         )}
 
@@ -110,5 +87,59 @@ export default function Download() {
         </div>
       </div>
     </main>
+  );
+}
+
+function ReleaseCard({ release }: { release: any }) {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+    }
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className="rounded-2xl border-2 border-[#222224] bg-gradient-to-b from-[#16161a] to-[#131316] p-6 space-y-4 relative overflow-hidden group cursor-pointer transition-all duration-300 hover:border-orange-500/50"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Spotlight overlay */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 95, 21, 0.15), transparent 70%)`
+        }}
+      />
+      
+      <div className="relative z-10">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold text-white">
+            {release.name} — <span className="text-default-400">{new Date(release.published_at).toDateString()}</span>
+          </h2>
+          <Button
+            as="a"
+            href={release.assets[0]?.browser_download_url}
+            target="_blank"
+            color="primary"
+            size="sm"
+            startContent={<Icon icon="mdi:download" />}
+            className="relative z-20"
+          >
+            Download .jar
+          </Button>
+        </div>
+
+        <div className="prose max-w-none prose-invert text-default-400">
+          <MarkdownPreview content={release.body} />
+        </div>
+      </div>
+    </div>
   );
 }
