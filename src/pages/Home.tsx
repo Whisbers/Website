@@ -92,6 +92,15 @@ export default function Home() {
             variant="flat"
             size="sm"
             as="a"
+            href="/#/contributors"
+            startContent={<Icon icon="mdi:user" />}
+          >
+            Contributors
+          </Button>
+          <Button
+            variant="flat"
+            size="sm"
+            as="a"
             href="https://docs.advancedarmorstands.ir"
             target="_blank"
             startContent={<Icon icon="mdi:book" />}
