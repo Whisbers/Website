@@ -158,7 +158,7 @@ export default function Animate() {
       />
       
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-b border-gray-800/50">
+      <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-b border-gray-800/50">
         <div className="max-w-full mx-auto px-6 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
@@ -212,7 +212,7 @@ export default function Animate() {
             animate={{ x: 0 }}
             exit={{ x: 400 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-20 right-0 bottom-40 w-96 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
+            className="fixed top-20 right-0 bottom-40 w-96 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
           >
             <div className="p-6 space-y-8">
               <div className="flex items-center justify-between">
@@ -277,7 +277,7 @@ export default function Animate() {
             animate={{ y: 0 }}
             exit={{ y: 200 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900/95 to-gray-950/95 backdrop-blur-xl border-t border-gray-800/50 z-20"
+            className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-t border-gray-800/50 z-20"
           >
             <div className="max-w-full mx-auto p-8">
               <div className="flex items-center gap-8 mb-6">
@@ -292,7 +292,7 @@ export default function Animate() {
                 
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:plus\" className="w-5 h-5" />}
+                  startContent={<Icon icon="lucide:plus" className="w-5 h-5" />}
                   onClick={addKeyFrame}
                   className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
@@ -301,7 +301,7 @@ export default function Animate() {
                 
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:download\" className="w-5 h-5" />}
+                  startContent={<Icon icon="lucide:download" className="w-5 h-5" />}
                   onClick={exportAnimation}
                   className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
@@ -311,7 +311,7 @@ export default function Animate() {
                 {!isPanelOpen && (
                   <Button
                     color="primary"
-                    startContent={<Icon icon="lucide:settings\" className="w-5 h-5" />}
+                    startContent={<Icon icon="lucide:settings" className="w-5 h-5" />}
                     onClick={() => setIsPanelOpen(true)}
                     className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                   >

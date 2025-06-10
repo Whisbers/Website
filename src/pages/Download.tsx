@@ -96,7 +96,7 @@ export default function Download() {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="relative z-10 px-6 sm:px-8 lg:px-12 pb-24"
       >
-        <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-gray-900/40 to-gray-950/60 backdrop-blur-xl p-12 text-center space-y-8">
+        <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-12 text-center space-y-8">
           <h2 className="text-3xl font-light text-white">
             <span className="bg-gradient-to-br from-orange-500 via-primary-500 to-red-500 bg-clip-text text-transparent">
               Thanks for Visiting!
@@ -152,7 +152,7 @@ function ReleaseCard({ release }: { release: any }) {
   return (
     <div
       ref={cardRef}
-      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-gray-900/40 to-gray-950/60 backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
+      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Spotlight effect */}

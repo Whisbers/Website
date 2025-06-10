@@ -38,7 +38,7 @@ function FeatureCard({ icon, title, description, onOpen, delay }: FeatureCardPro
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       ref={cardRef}
-      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-gray-900/40 to-gray-950/60 backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
+      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
       onMouseMove={handleMouseMove}
       onClick={onOpen}
     >
@@ -179,7 +179,7 @@ export default function ContributorsPage() {
             className="px-8 py-4 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
             as="a"
             href="/"
-            startContent={<Icon icon="mdi:arrow-left\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:arrow-left" className="w-5 h-5" />}
           >
             Back to Home
           </Button>
@@ -193,7 +193,7 @@ export default function ContributorsPage() {
           onClose={handleCloseModal}
           classNames={{
             backdrop: "bg-black/80 backdrop-blur-sm",
-            base: "border border-gray-800/50 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-xl",
+            base: "border border-gray-800/50 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl",
             header: "border-b border-gray-800/50",
             footer: "border-t border-gray-800/50",
           }}
