@@ -82,7 +82,7 @@ export default function Download() {
             size="lg"
             className="px-8 py-4 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
             onClick={() => navigate("/")}
-            startContent={<Icon icon="mdi:arrow-left\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:arrow-left" className="w-5 h-5" />}
           >
             Back to Home
           </Button>
@@ -96,7 +96,7 @@ export default function Download() {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="relative z-10 px-6 sm:px-8 lg:px-12 pb-24"
       >
-        <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-gray-900/40 to-gray-950/60 backdrop-blur-xl p-12 text-center space-y-8">
+        <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-12 text-center space-y-8">
           <h2 className="text-3xl font-light text-white">
             <span className="bg-gradient-to-br from-orange-500 via-primary-500 to-red-500 bg-clip-text text-transparent">
               Thanks for Visiting!
@@ -112,7 +112,7 @@ export default function Download() {
               as="a"
               href="https://github.com/Parsa3323"
               target="_blank"
-              startContent={<Icon icon="mdi:github\" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:github" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               GitHub
@@ -123,7 +123,7 @@ export default function Download() {
               as="a"
               href="https://docs.advancedarmorstands.ir"
               target="_blank"
-              startContent={<Icon icon="mdi:book-open-variant\" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:book-open-variant" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Documentation
@@ -152,7 +152,7 @@ function ReleaseCard({ release }: { release: any }) {
   return (
     <div
       ref={cardRef}
-      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-gray-900/40 to-gray-950/60 backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
+      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Spotlight effect */}
@@ -183,7 +183,7 @@ function ReleaseCard({ release }: { release: any }) {
             target="_blank"
             color="primary"
             size="lg"
-            startContent={<Icon icon="mdi:download\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:download" className="w-5 h-5" />}
             className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/25 relative z-20"
           >
             Download
