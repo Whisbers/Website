@@ -179,7 +179,7 @@ export default function ContributorsPage() {
             className="px-8 py-4 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
             as="a"
             href="/"
-            startContent={<Icon icon="mdi:arrow-left\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:arrow-left" className="w-5 h-5" />}
           >
             Back to Home
           </Button>
