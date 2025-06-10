@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,16 @@ import MetaTags from "../components/MetaTags";
 export default function Download() {
   const navigate = useNavigate();
   const { releases, loading } = useReleases();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
     <main className="dark min-h-screen bg-[radial-gradient(circle_at_center,#18181b,#030303)] relative overflow-hidden px-4 py-16">
@@ -37,26 +47,40 @@ export default function Download() {
           releases.map((release) => (
             <div
               key={release.tag_name}
-              className="rounded-2xl border-2 border-[#222224] bg-gradient-to-b from-[#16161a] to-[#131316] p-6 space-y-4"
+              className="rounded-2xl border-2 border-[#222224] bg-gradient-to-b from-[#16161a] to-[#131316] p-6 space-y-4 relative overflow-hidden group cursor-pointer transition-all duration-300 hover:border-orange-500/50"
+              style={{
+                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 95, 21, 0.1), transparent 40%)`
+              }}
             >
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-white">
-                  {release.name} — <span className="text-default-400">{new Date(release.published_at).toDateString()}</span>
-                </h2>
-                <Button
-                  as="a"
-                  href={release.assets[0]?.browser_download_url}
-                  target="_blank"
-                  color="primary"
-                  size="sm"
-                  startContent={<Icon icon="mdi:download" />}
-                >
-                  Download .jar
-                </Button>
-              </div>
+              {/* Spotlight overlay */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 95, 21, 0.15), transparent 70%)`
+                }}
+              />
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-semibold text-white">
+                    {release.name} — <span className="text-default-400">{new Date(release.published_at).toDateString()}</span>
+                  </h2>
+                  <Button
+                    as="a"
+                    href={release.assets[0]?.browser_download_url}
+                    target="_blank"
+                    color="primary"
+                    size="sm"
+                    startContent={<Icon icon="mdi:download" />}
+                    className="relative z-20"
+                  >
+                    Download .jar
+                  </Button>
+                </div>
 
-              <div className="prose max-w-none prose-invert text-default-400">
-                <MarkdownPreview content={release.body} />
+                <div className="prose max-w-none prose-invert text-default-400">
+                  <MarkdownPreview content={release.body} />
+                </div>
               </div>
             </div>
           ))
