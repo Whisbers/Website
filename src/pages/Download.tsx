@@ -10,13 +10,6 @@ import MetaTags from "../components/MetaTags";
 export default function Download() {
   const navigate = useNavigate();
   const { releases, loading } = useReleases();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <main className="dark min-h-screen bg-[radial-gradient(circle_at_center,#18181b,#030303)] relative overflow-hidden">
@@ -26,13 +19,11 @@ export default function Download() {
         url="https://advancedarmorstands.ir/#/download"
       />
       
-      {/* Dynamic grid background */}
-      <div 
-        className="fixed inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] z-0"
-        style={{
-          maskImage: `radial-gradient(ellipse_60%_50%_at_50%_${50 + scrollY * 0.1}%,black,transparent)`
-        }}
-      />
+      {/* Enhanced grid background that covers the entire page */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_40%,transparent_100%)] opacity-40" />
+      
+      {/* Additional subtle overlay for better visual depth */}
+      <div className="fixed inset-0 bg-gradient-to-b from-transparent via-gray-950/20 to-gray-950/40" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-24 space-y-16">
         {/* Header */}
@@ -91,7 +82,7 @@ export default function Download() {
             size="lg"
             className="px-8 py-4 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
             onClick={() => navigate("/")}
-            startContent={<Icon icon="mdi:arrow-left\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:arrow-left" className="w-5 h-5" />}
           >
             Back to Home
           </Button>
@@ -121,7 +112,7 @@ export default function Download() {
               as="a"
               href="https://github.com/Parsa3323"
               target="_blank"
-              startContent={<Icon icon="mdi:github\" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:github" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               GitHub
@@ -132,7 +123,7 @@ export default function Download() {
               as="a"
               href="https://docs.advancedarmorstands.ir"
               target="_blank"
-              startContent={<Icon icon="mdi:book\" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:book-open-variant" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Documentation
@@ -192,7 +183,7 @@ function ReleaseCard({ release }: { release: any }) {
             target="_blank"
             color="primary"
             size="lg"
-            startContent={<Icon icon="mdi:download\" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:download" className="w-5 h-5" />}
             className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/25 relative z-20"
           >
             Download
