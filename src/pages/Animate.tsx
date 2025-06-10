@@ -292,7 +292,7 @@ export default function Animate() {
                 
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:plus" className="w-5 h-5" />}
+                  startContent={<Icon icon="lucide:plus\" className="w-5 h-5" />}
                   onClick={addKeyFrame}
                   className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
@@ -301,7 +301,7 @@ export default function Animate() {
                 
                 <Button
                   color="primary"
-                  startContent={<Icon icon="lucide:download" className="w-5 h-5" />}
+                  startContent={<Icon icon="lucide:download\" className="w-5 h-5" />}
                   onClick={exportAnimation}
                   className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                 >
@@ -311,7 +311,7 @@ export default function Animate() {
                 {!isPanelOpen && (
                   <Button
                     color="primary"
-                    startContent={<Icon icon="lucide:settings" className="w-5 h-5" />}
+                    startContent={<Icon icon="lucide:settings\" className="w-5 h-5" />}
                     onClick={() => setIsPanelOpen(true)}
                     className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                   >

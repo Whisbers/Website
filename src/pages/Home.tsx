@@ -45,7 +45,7 @@ export default function Home() {
               size="lg"
               color="primary"
               variant="shadow"
-              startContent={<Icon icon="lucide:wand-2" className="w-5 h-5" />}
+              startContent={<Icon icon="lucide:wand-2\" className="w-5 h-5" />}
               as={Link}
               to="/animate"
               className="px-8 py-6 text-base font-medium rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-orange-500/25"
@@ -56,7 +56,7 @@ export default function Home() {
               size="lg"
               variant="bordered"
               className="px-8 py-6 text-base font-medium rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
-              startContent={<Icon icon="lucide:download" className="w-5 h-5" />}
+              startContent={<Icon icon="lucide:download\" className="w-5 h-5" />}
               as={Link}
               to="/download"
             >
@@ -122,7 +122,7 @@ export default function Home() {
               as="a"
               href="https://github.com/Parsa3323"
               target="_blank"
-              startContent={<Icon icon="mdi:github" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:github\" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               GitHub
@@ -132,7 +132,7 @@ export default function Home() {
               size="lg"
               as="a"
               href="/#/contributors"
-              startContent={<Icon icon="mdi:user" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:user\" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Contributors
@@ -143,7 +143,7 @@ export default function Home() {
               as="a"
               href="https://docs.advancedarmorstands.ir"
               target="_blank"
-              startContent={<Icon icon="mdi:book" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:book\" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Documentation

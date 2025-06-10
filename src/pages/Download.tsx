@@ -91,7 +91,7 @@ export default function Download() {
             size="lg"
             className="px-8 py-4 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
             onClick={() => navigate("/")}
-            startContent={<Icon icon="mdi:arrow-left" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:arrow-left\" className="w-5 h-5" />}
           >
             Back to Home
           </Button>
@@ -121,7 +121,7 @@ export default function Download() {
               as="a"
               href="https://github.com/Parsa3323"
               target="_blank"
-              startContent={<Icon icon="mdi:github" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:github\" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               GitHub
@@ -132,7 +132,7 @@ export default function Download() {
               as="a"
               href="https://docs.advancedarmorstands.ir"
               target="_blank"
-              startContent={<Icon icon="mdi:book" className="w-5 h-5" />}
+              startContent={<Icon icon="mdi:book\" className="w-5 h-5" />}
               className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Documentation
@@ -192,7 +192,7 @@ function ReleaseCard({ release }: { release: any }) {
             target="_blank"
             color="primary"
             size="lg"
-            startContent={<Icon icon="mdi:download" className="w-5 h-5" />}
+            startContent={<Icon icon="mdi:download\" className="w-5 h-5" />}
             className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/25 relative z-20"
           >
             Download
