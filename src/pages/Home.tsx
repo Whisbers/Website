@@ -12,16 +12,16 @@ export default function Home() {
       
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#222224_1px,transparent_1px),linear-gradient(to_bottom,#222224_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
       
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-24 relative z-10">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center space-y-12 py-32"
+          className="text-center space-y-8 sm:space-y-12 py-16 sm:py-32"
         >
-          <div className="space-y-6">
-            <h1 className="text-7xl sm:text-8xl font-light tracking-tight leading-none">
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-none">
               <span className="bg-gradient-to-br from-orange-500 via-primary-500 to-red-500 bg-clip-text text-transparent font-extralight">
                 Advanced
               </span>
@@ -30,7 +30,7 @@ export default function Home() {
                 Armor Stands
               </span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed px-4">
               Create stunning armor stand animations for Minecraft with precision and elegance.
             </p>
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
+            className="flex flex-col gap-4 sm:flex-row sm:gap-6 justify-center items-center pt-4 sm:pt-8 px-4"
           >
             <Button
               size="lg"
@@ -48,14 +48,14 @@ export default function Home() {
               startContent={<Icon icon="lucide:wand-2" className="w-5 h-5" />}
               as={Link}
               to="/animate"
-              className="px-8 py-6 text-base font-medium rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-orange-500/25"
+              className="w-full sm:w-auto px-8 py-6 text-base font-medium rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-orange-500/25"
             >
               Create Animations
             </Button>
             <Button
               size="lg"
               variant="bordered"
-              className="px-8 py-6 text-base font-medium rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
+              className="w-full sm:w-auto px-8 py-6 text-base font-medium rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
               startContent={<Icon icon="lucide:download" className="w-5 h-5" />}
               as={Link}
               to="/download"
@@ -70,7 +70,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="grid md:grid-cols-2 gap-8 py-24"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 py-12 sm:py-24 px-4"
         >
           <FeatureCard
             icon="lucide:wand-2"
@@ -104,18 +104,18 @@ export default function Home() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="relative z-10 px-6 sm:px-8 lg:px-12 pb-24"
+        className="relative z-10 px-4 sm:px-6 lg:px-12 pb-12 sm:pb-24"
       >
-        <div className="max-w-7xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-12 text-center space-y-8">
-          <h2 className="text-3xl font-light text-white">
+        <div className="max-w-7xl mx-auto rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-8 sm:p-12 text-center space-y-6 sm:space-y-8">
+          <h2 className="text-2xl sm:text-3xl font-light text-white">
             <span className="bg-gradient-to-br from-orange-500 via-primary-500 to-red-500 bg-clip-text text-transparent">
               Built for Creators
             </span>
           </h2>
-          <p className="text-lg text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
             Open-source. Actively supported. Designed with the community in mind.
           </p>
-          <div className="flex justify-center gap-6 pt-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 pt-4">
             <Button
               variant="flat"
               size="lg"
@@ -123,7 +123,7 @@ export default function Home() {
               href="https://github.com/Parsa3323"
               target="_blank"
               startContent={<Icon icon="mdi:github" className="w-5 h-5" />}
-              className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               GitHub
             </Button>
@@ -133,7 +133,7 @@ export default function Home() {
               as="a"
               href="/#/contributors"
               startContent={<Icon icon="mdi:account-group" className="w-5 h-5" />}
-              className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Contributors
             </Button>
@@ -144,7 +144,7 @@ export default function Home() {
               href="https://docs.advancedarmorstands.ir"
               target="_blank"
               startContent={<Icon icon="mdi:book-open-variant" className="w-5 h-5" />}
-              className="px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
             >
               Documentation
             </Button>
@@ -176,37 +176,48 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
     }
   };
 
+  // Check if device is mobile
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
-    <motion.div
+    <motion.button
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
       ref={cardRef}
-      className="group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
-      onMouseMove={handleMouseMove}
+      className={`group relative rounded-3xl border border-gray-800/50 bg-gradient-to-b from-[#151518] to-[#121215] backdrop-blur-xl p-6 sm:p-8 hover:border-orange-500/30 transition-all duration-500 cursor-pointer overflow-hidden w-full text-left ${
+        isMobile ? 'active:scale-95 active:bg-orange-500/5' : ''
+      }`}
+      onMouseMove={!isMobile ? handleMouseMove : undefined}
     >
-      {/* Spotlight effect */}
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 95, 21, 0.1), transparent 70%)`
-        }}
-      />
+      {/* Spotlight effect - only on desktop */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 95, 21, 0.1), transparent 70%)`
+          }}
+        />
+      )}
       
-      <div className="relative z-10 space-y-6">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <Icon icon={icon} className="w-7 h-7 text-orange-500" />
+      <div className="relative z-10 space-y-4 sm:space-y-6">
+        <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center transition-transform duration-300 ${
+          isMobile ? 'group-active:scale-110' : 'group-hover:scale-110'
+        }`}>
+          <Icon icon={icon} className="w-6 h-6 sm:w-7 sm:h-7 text-orange-500" />
         </div>
         
-        <div className="space-y-3">
-          <h3 className="text-2xl font-light text-white group-hover:text-orange-500 transition-colors duration-300">
+        <div className="space-y-2 sm:space-y-3">
+          <h3 className={`text-xl sm:text-2xl font-light text-white transition-colors duration-300 ${
+            isMobile ? 'group-active:text-orange-500' : 'group-hover:text-orange-500'
+          }`}>
             {title}
           </h3>
-          <p className="text-gray-400 font-light leading-relaxed text-base">
+          <p className="text-gray-400 font-light leading-relaxed text-sm sm:text-base">
             {description}
           </p>
         </div>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }

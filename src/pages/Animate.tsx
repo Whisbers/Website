@@ -159,9 +159,9 @@ export default function Animate() {
       
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-b border-gray-800/50">
-        <div className="max-w-full mx-auto px-6 py-6">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
+        <div className="max-w-full mx-auto px-4 sm:px-6 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
               <Button
                 as="a"
                 href="/"
@@ -175,7 +175,7 @@ export default function Animate() {
                 label="Animation Name"
                 value={animationName}
                 onChange={(e) => setAnimationName(e.target.value)}
-                className="w-64"
+                className="flex-1 sm:w-64"
                 classNames={{
                   input: "bg-gray-800/50 border-gray-700/50",
                   inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
@@ -187,7 +187,7 @@ export default function Animate() {
       </div>
 
       {/* 3D Canvas */}
-      <div className="absolute inset-0 pt-20">
+      <div className="absolute inset-0 pt-16 sm:pt-20">
         <Canvas camera={{ position: [0, 2, 5] }} shadows>
           <ambientLight intensity={0.4} />
           <directionalLight 
@@ -212,11 +212,11 @@ export default function Animate() {
             animate={{ x: 0 }}
             exit={{ x: 400 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-20 right-0 bottom-40 w-96 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
+            className="fixed top-16 sm:top-20 right-0 bottom-32 sm:bottom-40 w-full sm:w-96 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
           >
-            <div className="p-6 space-y-8">
+            <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-light text-white">Animation Controls</h3>
+                <h3 className="text-lg sm:text-xl font-light text-white">Animation Controls</h3>
                 <Button
                   color="primary"
                   isIconOnly
@@ -228,14 +228,14 @@ export default function Animate() {
               </div>
               
               {Object.entries(currentFrameData).map(([part, angles]) => (
-                <div key={part} className="space-y-4">
-                  <h4 className="text-lg font-light capitalize text-orange-500 border-b border-gray-800/50 pb-2">
+                <div key={part} className="space-y-3 sm:space-y-4">
+                  <h4 className="text-base sm:text-lg font-light capitalize text-orange-500 border-b border-gray-800/50 pb-2">
                     {part.replace('_', ' ')}
                   </h4>
                   {Object.entries(angles).map(([axis, value]) => (
-                    <div key={axis} className="space-y-3">
+                    <div key={axis} className="space-y-2 sm:space-y-3">
                       <div className="flex items-center justify-between">
-                        <label className="text-sm uppercase text-gray-400 font-medium tracking-wider">
+                        <label className="text-xs sm:text-sm uppercase text-gray-400 font-medium tracking-wider">
                           {axis}
                         </label>
                         <Input
@@ -244,9 +244,9 @@ export default function Animate() {
                           onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
                           min={-180}
                           max={180}
-                          className="w-20"
+                          className="w-16 sm:w-20"
                           classNames={{
-                            input: "text-center bg-gray-800/50 border-gray-700/50",
+                            input: "text-center bg-gray-800/50 border-gray-700/50 text-xs sm:text-sm",
                             inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
                           }}
                         />
@@ -279,47 +279,49 @@ export default function Animate() {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-t border-gray-800/50 z-20"
           >
-            <div className="max-w-full mx-auto p-8">
-              <div className="flex items-center gap-8 mb-6">
-                <Button
-                  color="primary"
-                  isIconOnly
-                  className="rounded-full w-14 h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105"
-                  onClick={playAnimation}
-                >
-                  <Icon icon={isPlaying ? "lucide:pause" : "lucide:play"} className="w-6 h-6" />
-                </Button>
-                
-                <Button
-                  color="primary"
-                  startContent={<Icon icon="lucide:plus" className="w-5 h-5" />}
-                  onClick={addKeyFrame}
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
-                >
-                  Add Keyframe
-                </Button>
-                
-                <Button
-                  color="primary"
-                  startContent={<Icon icon="lucide:download" className="w-5 h-5" />}
-                  onClick={exportAnimation}
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
-                >
-                  Export Animation
-                </Button>
-                
-                {!isPanelOpen && (
+            <div className="max-w-full mx-auto p-4 sm:p-8">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mb-4 sm:mb-6">
+                <div className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-start">
                   <Button
                     color="primary"
-                    startContent={<Icon icon="lucide:settings" className="w-5 h-5" />}
-                    onClick={() => setIsPanelOpen(true)}
-                    className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
+                    isIconOnly
+                    className="rounded-full w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105"
+                    onClick={playAnimation}
                   >
-                    Show Controls
+                    <Icon icon={isPlaying ? "lucide:pause" : "lucide:play"} className="w-5 h-5 sm:w-6 sm:h-6" />
                   </Button>
-                )}
+                  
+                  <Button
+                    color="primary"
+                    startContent={<Icon icon="lucide:plus" className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    onClick={addKeyFrame}
+                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
+                  >
+                    Add Keyframe
+                  </Button>
+                  
+                  <Button
+                    color="primary"
+                    startContent={<Icon icon="lucide:download" className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    onClick={exportAnimation}
+                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
+                  >
+                    Export
+                  </Button>
+                  
+                  {!isPanelOpen && (
+                    <Button
+                      color="primary"
+                      startContent={<Icon icon="lucide:settings" className="w-4 h-4 sm:w-5 sm:h-5" />}
+                      onClick={() => setIsPanelOpen(true)}
+                      className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
+                    >
+                      Controls
+                    </Button>
+                  )}
+                </div>
                 
-                <div className="flex-grow">
+                <div className="flex-1 w-full sm:max-w-md">
                   <div className="relative w-full">
                     <div 
                       className="absolute h-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300" 
@@ -340,22 +342,22 @@ export default function Animate() {
                   </div>
                 </div>
                 
-                <div className="w-40">
+                <div className="w-full sm:w-32">
                   <Input
                     type="number"
-                    label="Interval (ticks)"
+                    label="Interval"
                     value={interval}
                     min={1}
                     onChange={(e) => setInterval(Math.max(1, Number(e.target.value)))}
                     classNames={{
-                      input: "bg-gray-800/50 border-gray-700/50",
+                      input: "bg-gray-800/50 border-gray-700/50 text-sm",
                       inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
                     }}
                   />
                 </div>
               </div>
               
-              <div className="flex justify-between text-sm text-gray-400 font-light">
+              <div className="flex justify-between text-xs sm:text-sm text-gray-400 font-light">
                 <span>Frame {currentFrame + 1} of {frames.length}</span>
                 <span>Duration: {Math.round(frames.length * interval / 20 * 100) / 100}s</span>
               </div>
