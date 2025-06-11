@@ -9,7 +9,7 @@ import MetaTags from "../components/MetaTags";
 
 export default function Download() {
   const navigate = useNavigate();
-  const { releases, loading } = useReleases();
+  const { releases, loading, error } = useReleases();
 
   return (
     <main className="dark min-h-screen bg-[radial-gradient(circle_at_center,#18181b,#030303)] relative overflow-hidden">
@@ -54,6 +54,43 @@ export default function Download() {
               <div className="inline-flex items-center gap-3 text-gray-400">
                 <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
                 <span className="text-lg font-light">Loading releases...</span>
+              </div>
+            </motion.div>
+          ) : error ? (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12 sm:py-16"
+            >
+              <div className="space-y-4">
+                <Icon icon="mdi:alert-circle" className="w-12 h-12 text-red-500 mx-auto" />
+                <h3 className="text-xl font-light text-white">Failed to load releases</h3>
+                <p className="text-gray-400 font-light max-w-md mx-auto">
+                  {error}
+                </p>
+                <Button
+                  variant="bordered"
+                  size="lg"
+                  className="px-6 py-3 rounded-full border-2 border-gray-600 hover:border-white text-white hover:bg-white/5 transition-all duration-300"
+                  onClick={() => window.location.reload()}
+                  startContent={<Icon icon="mdi:refresh" className="w-5 h-5" />}
+                >
+                  Try Again
+                </Button>
+              </div>
+            </motion.div>
+          ) : releases.length === 0 ? (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12 sm:py-16"
+            >
+              <div className="space-y-4">
+                <Icon icon="mdi:package-variant" className="w-12 h-12 text-gray-500 mx-auto" />
+                <h3 className="text-xl font-light text-white">No releases found</h3>
+                <p className="text-gray-400 font-light">
+                  No releases are currently available.
+                </p>
               </div>
             </motion.div>
           ) : (
