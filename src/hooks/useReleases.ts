@@ -19,7 +19,15 @@ export function useReleases() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/Parsa3323/AdvancedArmorStands/releases")
+    // Use the Supabase Edge Function proxy instead of direct GitHub API call
+    const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/github-releases`;
+    
+    fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
