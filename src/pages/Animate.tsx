@@ -247,7 +247,7 @@ export default function Animate() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
             transition={{ type: "spring", stiffness: 400, damping: 40 }}
-            className="fixed top-20 right-0 bottom-32 w-96 bg-black/90 backdrop-blur-2xl border-l border-white/10 overflow-hidden z-20"
+            className="fixed top-20 right-0 bottom-32 w-96 bg-black/90 backdrop-blur-2xl border-l border-white/10 overflow-hidden z-20 rounded-tl-3xl"
           >
             <div className="h-full flex flex-col">
               {/* Panel Header */}
@@ -315,6 +315,29 @@ export default function Animate() {
                 ))}
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Pose Controls Button - Only shown when timeline is hidden and panel is closed */}
+      <AnimatePresence>
+        {!showControls && !isPanelOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className="fixed bottom-6 right-6 z-20"
+          >
+            <Button
+              size="lg"
+              variant="flat"
+              startContent={<Icon icon="lucide:sliders-horizontal" className="w-5 h-5" />}
+              onClick={() => setIsPanelOpen(true)}
+              className="px-6 py-3 rounded-full bg-black/90 backdrop-blur-2xl hover:bg-black/95 border border-white/20 hover:border-white/30 text-white font-medium shadow-2xl"
+            >
+              Pose Controls
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>
