@@ -247,7 +247,9 @@ export default function Animate() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
             transition={{ type: "spring", stiffness: 400, damping: 40 }}
-            className="fixed top-20 right-0 bottom-32 w-96 bg-black/90 backdrop-blur-2xl border-l border-white/10 overflow-hidden z-20 rounded-tl-3xl"
+            className={`fixed top-20 right-0 w-96 bg-black/90 backdrop-blur-2xl border-l border-white/10 overflow-hidden z-20 ${
+              showControls ? 'bottom-32 rounded-tl-3xl' : 'bottom-0 rounded-tl-3xl rounded-bl-3xl'
+            }`}
           >
             <div className="h-full flex flex-col">
               {/* Panel Header */}
