@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { Button, Input } from '@heroui/react';
+import { Button, Input, Card, CardBody, Divider } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import * as yaml from 'js-yaml';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -63,6 +63,21 @@ export default function Animate() {
   const addKeyFrame = () => {
     setFrames([...frames, { ...frames[currentFrame] || defaultFrame }]);
     setCurrentFrame(frames.length);
+  };
+
+  const deleteKeyFrame = () => {
+    if (frames.length > 1) {
+      const newFrames = frames.filter((_, index) => index !== currentFrame);
+      setFrames(newFrames);
+      setCurrentFrame(Math.min(currentFrame, newFrames.length - 1));
+    }
+  };
+
+  const duplicateKeyFrame = () => {
+    const newFrames = [...frames];
+    newFrames.splice(currentFrame + 1, 0, { ...frames[currentFrame] });
+    setFrames(newFrames);
+    setCurrentFrame(currentFrame + 1);
   };
 
   const updateCurrentFrame = (part: keyof KeyFrame, axis: 'x' | 'y' | 'z', value: number) => {
@@ -157,37 +172,57 @@ export default function Animate() {
         url="https://advancedarmorstands.ir/#/animate"
       />
       
-      {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-b border-gray-800/50">
-        <div className="max-w-full mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
+      {/* Modern Header */}
+      <div className="fixed top-0 left-0 right-0 z-20 bg-black/80 backdrop-blur-2xl border-b border-white/10">
+        <div className="max-w-full mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
               <Button
                 as="a"
                 href="/"
-                color="primary"
                 isIconOnly
-                className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
+                variant="flat"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all duration-200"
               >
-                <Icon icon="lucide:arrow-left" className="w-5 h-5" />
+                <Icon icon="lucide:arrow-left" className="w-4 h-4 text-white" />
               </Button>
+              
+              <div className="flex items-center gap-4">
+                <h1 className="text-xl font-medium text-white tracking-tight">Animation Creator</h1>
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm text-white/70 font-medium">Live Preview</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
               <Input
-                label="Animation Name"
+                placeholder="Animation name"
                 value={animationName}
                 onChange={(e) => setAnimationName(e.target.value)}
-                className="flex-1 sm:w-64"
+                className="w-48 hidden sm:block"
                 classNames={{
-                  input: "bg-gray-800/50 border-gray-700/50",
-                  inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
+                  input: "bg-transparent text-white placeholder:text-white/50",
+                  inputWrapper: "bg-white/10 border-white/20 hover:border-white/30 focus-within:border-orange-500/50 backdrop-blur-xl"
                 }}
               />
+              
+              <Button
+                color="primary"
+                startContent={<Icon icon="lucide:download" className="w-4 h-4" />}
+                onClick={exportAnimation}
+                className="px-6 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 font-medium"
+              >
+                Export
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
       {/* 3D Canvas */}
-      <div className="absolute inset-0 pt-16 sm:pt-20">
+      <div className="absolute inset-0 pt-20">
         <Canvas camera={{ position: [0, 2, 5] }} shadows>
           <ambientLight intensity={0.4} />
           <directionalLight 
@@ -204,162 +239,217 @@ export default function Animate() {
         </Canvas>
       </div>
 
-      {/* Control Panel */}
+      {/* Modern Control Panel */}
       <AnimatePresence>
         {isPanelOpen && (
           <motion.div
-            initial={{ x: 400 }}
-            animate={{ x: 0 }}
-            exit={{ x: 400 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-16 sm:top-20 right-0 bottom-32 sm:bottom-40 w-full sm:w-96 bg-gradient-to-b from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-l border-gray-800/50 overflow-y-auto z-20"
+            initial={{ x: 400, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 400, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 40 }}
+            className="fixed top-20 right-0 bottom-32 w-96 bg-black/90 backdrop-blur-2xl border-l border-white/10 overflow-hidden z-20"
           >
-            <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg sm:text-xl font-light text-white">Animation Controls</h3>
+            <div className="h-full flex flex-col">
+              {/* Panel Header */}
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <h3 className="text-lg font-medium text-white">Pose Controls</h3>
                 <Button
-                  color="primary"
                   isIconOnly
-                  className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600"
+                  variant="flat"
+                  size="sm"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20"
                   onClick={() => setIsPanelOpen(false)}
                 >
-                  <Icon icon="lucide:x" className="w-4 h-4" />
+                  <Icon icon="lucide:x" className="w-4 h-4 text-white" />
                 </Button>
               </div>
               
-              {Object.entries(currentFrameData).map(([part, angles]) => (
-                <div key={part} className="space-y-3 sm:space-y-4">
-                  <h4 className="text-base sm:text-lg font-light capitalize text-orange-500 border-b border-gray-800/50 pb-2">
-                    {part.replace('_', ' ')}
-                  </h4>
-                  {Object.entries(angles).map(([axis, value]) => (
-                    <div key={axis} className="space-y-2 sm:space-y-3">
-                      <div className="flex items-center justify-between">
-                        <label className="text-xs sm:text-sm uppercase text-gray-400 font-medium tracking-wider">
-                          {axis}
-                        </label>
-                        <Input
-                          type="number"
-                          value={value}
-                          onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
-                          min={-180}
-                          max={180}
-                          className="w-16 sm:w-20"
-                          classNames={{
-                            input: "text-center bg-gray-800/50 border-gray-700/50 text-xs sm:text-sm",
-                            inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
-                          }}
-                        />
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                {Object.entries(currentFrameData).map(([part, angles]) => (
+                  <Card key={part} className="bg-white/5 border-white/10">
+                    <CardBody className="p-5">
+                      <h4 className="text-base font-medium capitalize text-orange-500 mb-4 flex items-center gap-2">
+                        <Icon icon={getPartIcon(part)} className="w-4 h-4" />
+                        {part.replace('_', ' ')}
+                      </h4>
+                      
+                      <div className="space-y-4">
+                        {Object.entries(angles).map(([axis, value]) => (
+                          <div key={axis} className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-xs uppercase text-white/60 font-semibold tracking-wider">
+                                {axis}-axis
+                              </label>
+                              <Input
+                                type="number"
+                                value={value}
+                                onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
+                                min={-180}
+                                max={180}
+                                className="w-20"
+                                size="sm"
+                                classNames={{
+                                  input: "text-center bg-transparent text-white text-sm font-mono",
+                                  inputWrapper: "bg-white/10 border-white/20 hover:border-orange-500/50 focus-within:border-orange-500 h-8"
+                                }}
+                              />
+                            </div>
+                            <div className="relative">
+                              <input
+                                type="range"
+                                value={value}
+                                onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
+                                min={-180}
+                                max={180}
+                                step={1}
+                                className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer slider"
+                              />
+                              <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0.5 h-4 bg-white/20 rounded-full"></div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                      <input
-                        type="range"
-                        value={value}
-                        onChange={(e) => updateCurrentFrame(part as keyof KeyFrame, axis as 'x' | 'y' | 'z', Number(e.target.value))}
-                        min={-180}
-                        max={180}
-                        step={1}
-                        className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-orange-500 slider"
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))}
+                    </CardBody>
+                  </Card>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Bottom Controls */}
+      {/* Modern Bottom Controls */}
       <AnimatePresence>
         {showControls && (
           <motion.div
-            initial={{ y: 200 }}
-            animate={{ y: 0 }}
-            exit={{ y: 200 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#151518]/95 to-[#121215]/95 backdrop-blur-xl border-t border-gray-800/50 z-20"
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 200, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 40 }}
+            className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-2xl border-t border-white/10 z-20"
           >
-            <div className="max-w-full mx-auto p-4 sm:p-8">
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mb-4 sm:mb-6">
-                <div className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-start">
+            <div className="max-w-full mx-auto p-6">
+              {/* Main Controls Row */}
+              <div className="flex items-center gap-6 mb-6">
+                {/* Playback Controls */}
+                <div className="flex items-center gap-3">
                   <Button
-                    color="primary"
                     isIconOnly
-                    className="rounded-full w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105"
+                    size="lg"
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105"
                     onClick={playAnimation}
                   >
-                    <Icon icon={isPlaying ? "lucide:pause" : "lucide:play"} className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <Icon icon={isPlaying ? "lucide:pause" : "lucide:play"} className="w-5 h-5" />
                   </Button>
                   
-                  <Button
-                    color="primary"
-                    startContent={<Icon icon="lucide:plus" className="w-4 h-4 sm:w-5 sm:h-5" />}
-                    onClick={addKeyFrame}
-                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
-                  >
-                    Add Keyframe
-                  </Button>
+                  <Divider orientation="vertical" className="h-8 bg-white/20" />
                   
-                  <Button
-                    color="primary"
-                    startContent={<Icon icon="lucide:download" className="w-4 h-4 sm:w-5 sm:h-5" />}
-                    onClick={exportAnimation}
-                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
-                  >
-                    Export
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      startContent={<Icon icon="lucide:plus" className="w-4 h-4" />}
+                      onClick={addKeyFrame}
+                      className="px-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium"
+                    >
+                      Add
+                    </Button>
+                    
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      startContent={<Icon icon="lucide:copy" className="w-4 h-4" />}
+                      onClick={duplicateKeyFrame}
+                      className="px-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium"
+                    >
+                      Duplicate
+                    </Button>
+                    
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      startContent={<Icon icon="lucide:trash-2" className="w-4 h-4" />}
+                      onClick={deleteKeyFrame}
+                      isDisabled={frames.length <= 1}
+                      className="px-4 rounded-full bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 hover:border-red-500/50 text-red-400 font-medium disabled:opacity-50"
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+                
+                {/* Timeline */}
+                <div className="flex-1 max-w-2xl">
+                  <div className="relative">
+                    <div className="flex items-center justify-between text-xs text-white/60 font-medium mb-2">
+                      <span>Timeline</span>
+                      <span>{Math.round(frames.length * interval / 20 * 100) / 100}s</span>
+                    </div>
+                    <div className="relative h-3 bg-white/10 rounded-full overflow-hidden">
+                      <div 
+                        className="absolute h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-200" 
+                        style={{ 
+                          width: `${(currentFrame / Math.max(frames.length - 1, 1)) * 100}%`,
+                          maxWidth: '100%'
+                        }} 
+                      />
+                      <input
+                        type="range"
+                        value={currentFrame}
+                        onChange={(e) => setCurrentFrame(Number(e.target.value))}
+                        min={0}
+                        max={frames.length - 1}
+                        step={1}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Settings */}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <label className="text-sm text-white/70 font-medium">Interval</label>
+                    <Input
+                      type="number"
+                      value={interval}
+                      min={1}
+                      onChange={(e) => setInterval(Math.max(1, Number(e.target.value)))}
+                      className="w-20"
+                      size="sm"
+                      classNames={{
+                        input: "text-center bg-transparent text-white font-mono",
+                        inputWrapper: "bg-white/10 border-white/20 hover:border-orange-500/50 focus-within:border-orange-500 h-8"
+                      }}
+                    />
+                  </div>
                   
                   {!isPanelOpen && (
                     <Button
-                      color="primary"
-                      startContent={<Icon icon="lucide:settings" className="w-4 h-4 sm:w-5 sm:h-5" />}
+                      size="sm"
+                      variant="flat"
+                      startContent={<Icon icon="lucide:sliders-horizontal" className="w-4 h-4" />}
                       onClick={() => setIsPanelOpen(true)}
-                      className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 text-sm sm:text-base"
+                      className="px-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium"
                     >
                       Controls
                     </Button>
                   )}
                 </div>
-                
-                <div className="flex-1 w-full sm:max-w-md">
-                  <div className="relative w-full">
-                    <div 
-                      className="absolute h-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300" 
-                      style={{ 
-                        width: `${(currentFrame / Math.max(frames.length - 1, 1)) * 100}%`,
-                        maxWidth: '100%'
-                      }} 
-                    />
-                    <input
-                      type="range"
-                      value={currentFrame}
-                      onChange={(e) => setCurrentFrame(Number(e.target.value))}
-                      min={0}
-                      max={frames.length - 1}
-                      step={1}
-                      className="w-full h-2 bg-gray-800 rounded-full appearance-none cursor-pointer accent-orange-500 relative z-10 slider"
-                    />
-                  </div>
-                </div>
-                
-                <div className="w-full sm:w-32">
-                  <Input
-                    type="number"
-                    label="Interval"
-                    value={interval}
-                    min={1}
-                    onChange={(e) => setInterval(Math.max(1, Number(e.target.value)))}
-                    classNames={{
-                      input: "bg-gray-800/50 border-gray-700/50 text-sm",
-                      inputWrapper: "bg-gray-800/50 border-gray-700/50 hover:border-orange-500/50 focus-within:border-orange-500"
-                    }}
-                  />
-                </div>
               </div>
               
-              <div className="flex justify-between text-xs sm:text-sm text-gray-400 font-light">
-                <span>Frame {currentFrame + 1} of {frames.length}</span>
-                <span>Duration: {Math.round(frames.length * interval / 20 * 100) / 100}s</span>
+              {/* Status Bar */}
+              <div className="flex justify-between items-center text-sm text-white/60 font-medium">
+                <div className="flex items-center gap-4">
+                  <span>Frame {currentFrame + 1} of {frames.length}</span>
+                  <span>•</span>
+                  <span>{animationName}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span>Ready</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -367,4 +457,15 @@ export default function Animate() {
       </AnimatePresence>
     </div>
   );
+}
+
+function getPartIcon(part: string): string {
+  switch (part) {
+    case 'head': return 'lucide:circle';
+    case 'left_arm': return 'lucide:move-3d';
+    case 'right_arm': return 'lucide:move-3d';
+    case 'left_leg': return 'lucide:move-vertical';
+    case 'right_leg': return 'lucide:move-vertical';
+    default: return 'lucide:circle';
+  }
 }
